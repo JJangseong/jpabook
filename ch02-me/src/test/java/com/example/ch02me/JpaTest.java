@@ -48,9 +48,13 @@ public class JpaTest {
 
         //수정
         member.setAge(20);
+        member.setUsername("성진");
 
         //한 건 조회
         Member findMember = em.find(Member.class, id);
+        System.out.println("findMember=" + findMember.getUsername() + ", age=" + findMember.getAge());
+
+        findMember = em.find(Member.class, id);
         System.out.println("findMember=" + findMember.getUsername() + ", age=" + findMember.getAge());
 
         //목록 조회
