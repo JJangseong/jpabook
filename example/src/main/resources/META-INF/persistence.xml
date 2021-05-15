@@ -4,6 +4,7 @@
     <persistence-unit name="jpabook">
 
         <class>com.example.ch02me.entities.Member</class>
+        <class>com.example.ch02me.entities.Team</class>
         <properties>
             <!-- 필수 속성 -->
             <property name="javax.persistence.jdbc.driver" value="com.mysql.cj.jdbc.Driver"/>
@@ -17,7 +18,7 @@
             <property name="hibernate.use_sql_comments" value="true" />
             <property name="hibernate.id.new_generator_mappings" value="true" />
 
-            <!--<property name="hibernate.hbm2ddl.auto" value="create" />-->
+<!--            <property name="hibernate.hbm2ddl.auto" value="create" />-->
         </properties>
     </persistence-unit>
 

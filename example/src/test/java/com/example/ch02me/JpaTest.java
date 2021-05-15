@@ -1,6 +1,7 @@
 package com.example.ch02me;
 
 import com.example.ch02me.entities.Member;
+import com.example.ch02me.entities.Team;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
@@ -22,7 +23,7 @@ public class JpaTest {
 
 
             tx.begin(); //트랜잭션 시작
-            logic(em);  //비즈니스 로직
+            testSave(em);  //비즈니스 로직
             tx.commit();//트랜잭션 커밋
 
         } catch (Exception e) {
@@ -41,23 +42,21 @@ public class JpaTest {
         Member member = new Member();
         member.setId(id);
         member.setUsername("지한");
-        member.setAge(2);
 
         //등록
         em.persist(member);
 
         //수정
-        member.setAge(20);
         member.setUsername("성진");
 
         //한 건 조회
         Member findMember = em.find(Member.class, id);
-        System.out.println("findMember=" + findMember.getUsername() + ", age=" + findMember.getAge());
+        System.out.println("findMember=" + findMember.getUsername() );
 
         findMember.setUsername("aaa");
 
         findMember = em.find(Member.class, id);
-        System.out.println("findMember=" + findMember.getUsername() + ", age=" + findMember.getAge());
+        System.out.println("findMember=" + findMember.getUsername());
 
         //목록 조회
         List<Member> members = em.createQuery("select m from Member m", Member.class).getResultList();
@@ -66,6 +65,15 @@ public class JpaTest {
         //삭제
         em.remove(member);
 
+    }
+
+    public static void testSave(EntityManager em) {
+        Team team1 = new Team("team2", "팀1");
+        em.persist(team1);
+
+        Member member1 = new Member("member1", "회원1");
+        member1.setTeam(team1);
+        em.persist(member1);
     }
 
 }
